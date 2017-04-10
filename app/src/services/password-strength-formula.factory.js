@@ -16,7 +16,13 @@
             getStrength: getStrength
         };
 
-
+        /**
+         * Escape RegExp characters
+         * @param {String} str - chars to be escaped
+         */
+        function escapeRegChars(str) {
+            return str.replace(/[-[\]\/{}()*+?.^$|]/g, "\\$&");
+        };
 
         /////////////////////////////
 
@@ -119,7 +125,7 @@
                 var arr = _p.split('');
                 counts.neg.repeated = 0;
                 for (i = 0; i < arr.length; i++) {
-                    var _reg = new RegExp(_p[i], 'g');
+                    var _reg = new RegExp(escapeRegChars(_p[i]), 'g');
                     var cnt = _p.match(_reg).length;
                     if (cnt > 1 && !repeats[_p[i]]) {
                         repeats[_p[i]] = cnt;
